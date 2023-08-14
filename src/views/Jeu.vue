@@ -2,7 +2,6 @@
 import Navbar from '@/components/Navbar.vue';
 
 
-
 import Chien from "@/assets/images/Chien.png"
 import Coq from "@/assets/images/Coq.png"
 import Dinosaures from "@/assets/images/Dinosaures .png"
@@ -13,7 +12,6 @@ import Singe from "@/assets/images/Singe.png"
 import Panthere from "@/assets/images/Panthere.png"
 import Cheval from "@/assets/images/Cheval.png"
 
-import { Fireworks } from '@fireworks-js/vue'
 import { ref, onMounted, watch } from "vue" 
 
 const images = ref([
@@ -28,20 +26,14 @@ const images = ref([
     Panthere
 ]);
 
-
-//const pairesImages: ref<cardRefs[]> = ref([])
-//const pairesImages = ref([]);
 const pairesImages = ref<Card[]>([]);
 const nbreTentatives = ref(0)
 const paires = ref([])
-//const pairesTrouver : ref<Card[]> = ref([])
-//const timestamp = ref(0)
 const timer = ref()
 const startTimer = ref<boolean>(false)
 
 const pairesTrouver = ref(0);
-const timestamp = ref("0"); // Initialisation du temps
-//const timer = ref(null); 
+const timestamp = ref("0"); 
 
 
 const melange = () => {
@@ -84,27 +76,6 @@ const myButton = ref(null);
 console.log(myButton.value)
 const isButtonDisabled = ref(true);
 function rotate(e) {    
-  /*   isButtonDisabled.value = false
-    startTimer.value = true
-    if (paires.value.length < 2) {
-        paires.value.push(e.target)
-        e.target.classList.toggle("rotate");
-        if (paires.value.length === 2) {
-            nbreTentatives.value++
-            if (paires.value[0].dataset.id === paires.value[1].dataset.id) {
-                pairesTrouver.value++
-                paires.value = []
-            }
-            else {
-                setTimeout(() => {
-                    paires.value[0].classList.remove('rotate')
-                    paires.value[1].classList.remove('rotate')
-                    paires.value = []
-                }, 1000)
-            }
-        }
-    }   */
-
     isButtonDisabled.value = false
     startTimer.value = true
     if (paires.value.length < 2) {
@@ -119,8 +90,6 @@ function rotate(e) {
                 if (pairesTrouver.value === 9) {
                     clearInterval(timer.value);
                     startTimer.value = false;
-                    // Afficher un message de félicitations
-                    console.log("Félicitations, vous avez gagné !");
                 }
             } else {
                 setTimeout(() => {
@@ -132,10 +101,6 @@ function rotate(e) {
         }
     }  
 }
-
-
-
-//const dureeAffichageInitial = 3000;
 
 const affichageInitialEnCours = ref(true);
 
@@ -183,7 +148,7 @@ function reset() {
 }
 
 function closeModal() {
-    pairesTrouver.value = 0; // Réinitialiser le compteur de paires trouvées
+    pairesTrouver.value = 0;
 }
 
 onMounted(() => {
@@ -250,9 +215,7 @@ onMounted(() => {
     width: 100%;
     padding: 1rem 2rem;
 }
-header {
-    /*  width: 96%; */
-}
+
 main {
     overflow-y: hidden;
     margin-top: 25px;
@@ -270,7 +233,6 @@ main {
     height: 5rem;
     width: 100%;
     padding: 0.5rem;
-    /*  margin-bottom: 2rem; */
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
