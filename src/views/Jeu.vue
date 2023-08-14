@@ -2,7 +2,6 @@
 import Navbar from '@/components/Navbar.vue';
 
 
-
 import Chien from "@/assets/images/Chien.png"
 import Coq from "@/assets/images/Coq.png"
 import Dinosaures from "@/assets/images/Dinosaures .png"
