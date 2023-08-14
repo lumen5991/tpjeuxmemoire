@@ -2,6 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 
 
+
 import Chien from "@/assets/images/Chien.png"
 import Coq from "@/assets/images/Coq.png"
 import Dinosaures from "@/assets/images/Dinosaures .png"
@@ -11,7 +12,6 @@ import Lion from "@/assets/images/Lion.png"
 import Singe from "@/assets/images/Singe.png"
 import Panthere from "@/assets/images/Panthere.png"
 import Cheval from "@/assets/images/Cheval.png"
-
 
 import { ref, onMounted, watch } from "vue"
 
@@ -27,15 +27,14 @@ const images = ref([
     Panthere
 ]);
 
-
-const pairesImages: ref<Card[]> = ref([])
+const pairesImages = ref<Card[]>([]);
 const nbreTentatives = ref(0)
 const paires = ref([])
-const pairesTrouver = ref([])
-const timestamp = ref(0)
 const timer = ref()
 const startTimer = ref<boolean>(false)
 
+const pairesTrouver = ref(0);
+const timestamp = ref("0");
 
 const melange = () => {
     let createPairs = [];
@@ -43,6 +42,7 @@ const melange = () => {
         createPairs.push(
             { id: i, img: images.value[i] },
             { id: i, img: images.value[i] }
+
         );
     }
     pairesImages.value = createPairs.sort(() => 0.5 - Math.random());
@@ -76,6 +76,7 @@ const myButton = ref(null);
 console.log(myButton.value)
 const isButtonDisabled = ref(true);
 function rotate(e) {
+
     isButtonDisabled.value = false
     startTimer.value = true
     if (paires.value.length < 2) {
@@ -86,8 +87,12 @@ function rotate(e) {
             if (paires.value[0].dataset.id === paires.value[1].dataset.id) {
                 pairesTrouver.value++
                 paires.value = []
-            }
-            else {
+
+                if (pairesTrouver.value === 9) {
+                    clearInterval(timer.value);
+                    startTimer.value = false;
+                }
+            } else {
                 setTimeout(() => {
                     paires.value[0].classList.remove('rotate')
                     paires.value[1].classList.remove('rotate')
@@ -97,7 +102,6 @@ function rotate(e) {
         }
     }
 }
-
 const affichageInitialEnCours = ref(true);
 
 function afficherCartes() {
@@ -106,9 +110,9 @@ function afficherCartes() {
 
 function recommencer() {
     nbreTentatives.value = 0
-    pairesImages.value = 0
-    timestamp.value = 0
-    startTimer.value = true
+    pairesImages.value = []
+    timestamp.value = '0'
+    startTimer.value = false
     isButtonDisabled.value = true
     clearInterval(timer.value)
     paires.value = []
@@ -118,7 +122,7 @@ function recommencer() {
         clearInterval(timer.value)
         document.querySelector("#restart").innerHTML = 'rejouer'
         melange()
-        reset()
+        startTimer.value = true
 
 
     }
@@ -141,6 +145,10 @@ function reset() {
             affichageInitialEnCours.value = false;
         }, 10000);
     });
+}
+
+function closeModal() {
+    pairesTrouver.value = 0; 
 }
 
 onMounted(() => {
@@ -167,6 +175,14 @@ onMounted(() => {
                         Recommencer</button>
                 </div>
                 <div class="cards">
+
+                    <div class="modal" v-if="pairesTrouver === 9">
+                        <div class="modal-content">
+                            <h2>Félicitations !</h2>
+                            <p>Vous avez trouvé toutes les paires de cartes !</p>
+                            <button class="modal-close-button" @click="closeModal">Fermer</button>
+                        </div>
+                    </div>
 
                     <div class="card" v-for="(element, i) in pairesImages" :key="i" :data-id="element.id"
                         @click.self="rotate" :ref="ref => cardRefs[i] = ref">
@@ -199,10 +215,6 @@ onMounted(() => {
     padding: 1rem 2rem;
 }
 
-header {
-    /*  width: 96%; */
-}
-
 main {
     overflow-y: hidden;
     margin-top: 25px;
@@ -220,13 +232,44 @@ main {
     height: 5rem;
     width: 100%;
     padding: 0.5rem;
-    /*  margin-bottom: 2rem; */
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 25px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.modal-close-button {
+    margin-top: 20px;
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .restart {
