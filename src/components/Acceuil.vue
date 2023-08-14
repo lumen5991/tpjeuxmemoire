@@ -23,7 +23,6 @@
 </template>
 
 <style scoped>
-
 .container {
   max-width: 50rem;
   margin: 0 auto;
@@ -33,17 +32,30 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  ;
-  margin: 5rem auto;
+  margin: 15rem auto;
 }
 
 .left {
   flex: 1;
+  animation: welcomeAnimation 1s ease-in-out;
+}
+
+@keyframes welcomeAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .left h2 {
   font-size: 36px;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .left span {
@@ -53,33 +65,47 @@
 p {
   font-size: 20px;
   line-height: 1.6;
+  text-align: justify;
 }
 
 .right {
-    width: 60%;
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-
+  width: 60%;
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .router-link {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #3498db;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-    font-weight: 600;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #3498db;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: 600;
 }
 
 .router-link:hover {
-  background-color: #3498db;
-  color: #fff;  
+  background-color: #4CAF50;
+  color: #fff;
+  animation: buttonHoverEffect 0.3s ease-in-out;
 }
-</style>
+
+@keyframes buttonHoverEffect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}</style>

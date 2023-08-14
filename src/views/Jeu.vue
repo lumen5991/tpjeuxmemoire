@@ -2,7 +2,6 @@
 import Navbar from '@/components/Navbar.vue';
 
 
-
 import Chien from "@/assets/images/Chien.png"
 import Coq from "@/assets/images/Coq.png"
 import Dinosaures from "@/assets/images/Dinosaures .png"
@@ -13,8 +12,8 @@ import Singe from "@/assets/images/Singe.png"
 import Panthere from "@/assets/images/Panthere.png"
 import Cheval from "@/assets/images/Cheval.png"
 
-import { Fireworks } from '@fireworks-js/vue'
-import { ref, onMounted, watch } from "vue" 
+
+import { ref, onMounted, watch } from "vue"
 
 const images = ref([
     Cheval,
@@ -76,7 +75,7 @@ watch(
 const myButton = ref(null);
 console.log(myButton.value)
 const isButtonDisabled = ref(true);
-function rotate(e) {    
+function rotate(e) {
     isButtonDisabled.value = false
     startTimer.value = true
     if (paires.value.length < 2) {
@@ -96,10 +95,8 @@ function rotate(e) {
                 }, 1000)
             }
         }
-    }  
+    }
 }
-
-//const dureeAffichageInitial = 3000;
 
 const affichageInitialEnCours = ref(true);
 
@@ -111,15 +108,15 @@ function recommencer() {
     nbreTentatives.value = 0
     pairesImages.value = 0
     timestamp.value = 0
-    startTimer.value=true
+    startTimer.value = true
     isButtonDisabled.value = true
     clearInterval(timer.value)
     paires.value = []
     melange()
     reset()
-    if(pairesTrouver.value === 9){
+    if (pairesTrouver.value === 9) {
         clearInterval(timer.value)
-        document.querySelector("#restart").innerHTML='rejouer'
+        document.querySelector("#restart").innerHTML = 'rejouer'
         melange()
         reset()
 
@@ -130,25 +127,25 @@ function recommencer() {
 const cardRefs = ref<HTMLElement[]>([]);
 function reset() {
     const affichageInitialEnCours = ref(true);
-   
+
     cardRefs.value.forEach(cardRef => {
         if (cardRef) {
             cardRef.classList.add("rotate");
         }
         setTimeout(() => {
-        cardRefs.value.forEach(cardRef => {
-            if (cardRef) {
-                cardRef.classList.remove("rotate");
-            }
-        });
-        affichageInitialEnCours.value = false; 
-    }, 10000);
+            cardRefs.value.forEach(cardRef => {
+                if (cardRef) {
+                    cardRef.classList.remove("rotate");
+                }
+            });
+            affichageInitialEnCours.value = false;
+        }, 10000);
     });
 }
 
 onMounted(() => {
     melange();
-    
+
 });
 
 </script>
@@ -164,12 +161,13 @@ onMounted(() => {
                     <span>Nombre d'essais : {{ nbreTentatives }} </span>
                     <span>Temps du jeu : {{ timestamp }} </span>
                     <span>Nombre de bonnes réponses : {{ pairesTrouver }} </span>
-                    <button class="restart"  v-if="affichageInitialEnCours" @click="afficherCartes">Afficher les cartes</button>
+                    <button class="restart" v-if="affichageInitialEnCours" @click="afficherCartes">Afficher les
+                        cartes</button>
                     <button ref="myButton" :disabled="isButtonDisabled" class="restart" @click="recommencer">&#x21BB;
                         Recommencer</button>
                 </div>
                 <div class="cards">
-            
+
                     <div class="card" v-for="(element, i) in pairesImages" :key="i" :data-id="element.id"
                         @click.self="rotate" :ref="ref => cardRefs[i] = ref">
                         <div class="card__front">
@@ -182,12 +180,10 @@ onMounted(() => {
             </main>
         </div>
     </div>
-   
 </template>
 
 
 <style >
-
 * {
     padding: 0;
     margin: 0;
@@ -202,9 +198,11 @@ onMounted(() => {
     width: 100%;
     padding: 1rem 2rem;
 }
+
 header {
     /*  width: 96%; */
 }
+
 main {
     overflow-y: hidden;
     margin-top: 25px;
@@ -248,14 +246,16 @@ main {
     margin-top: 20px;
 
 }
+
 .card {
     cursor: pointer;
     position: relative;
     transform-style: preserve-3d;
     transition: 0.3s all ease-in-out;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 .card__front {
     width: 100%;
     height: 100%;
@@ -268,6 +268,7 @@ main {
     justify-content: center;
     border-radius: 10px;
 }
+
 .card-body {
     display: flex;
     justify-content: center;
@@ -285,5 +286,4 @@ main {
 
 .rotate {
     transform: rotateY(180deg);
-}
-</style>
+}</style>
