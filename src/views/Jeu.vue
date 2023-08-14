@@ -29,13 +29,19 @@ const images = ref([
 ]);
 
 
-const pairesImages: ref<Card[]> = ref([])
+//const pairesImages: ref<cardRefs[]> = ref([])
+//const pairesImages = ref([]);
+const pairesImages = ref<Card[]>([]);
 const nbreTentatives = ref(0)
 const paires = ref([])
-const pairesTrouver = ref([])
-const timestamp = ref(0)
+//const pairesTrouver : ref<Card[]> = ref([])
+//const timestamp = ref(0)
 const timer = ref()
 const startTimer = ref<boolean>(false)
+
+const pairesTrouver = ref(0);
+const timestamp = ref("0"); // Initialisation du temps
+//const timer = ref(null); 
 
 
 const melange = () => {
@@ -44,7 +50,8 @@ const melange = () => {
         createPairs.push(
             { id: i, img: images.value[i] },
             { id: i, img: images.value[i] }
-        );
+     
+            );
     }
     pairesImages.value = createPairs.sort(() => 0.5 - Math.random());
 
@@ -77,7 +84,7 @@ const myButton = ref(null);
 console.log(myButton.value)
 const isButtonDisabled = ref(true);
 function rotate(e) {    
-    isButtonDisabled.value = false
+  /*   isButtonDisabled.value = false
     startTimer.value = true
     if (paires.value.length < 2) {
         paires.value.push(e.target)
@@ -96,8 +103,37 @@ function rotate(e) {
                 }, 1000)
             }
         }
+    }   */
+
+    isButtonDisabled.value = false
+    startTimer.value = true
+    if (paires.value.length < 2) {
+        paires.value.push(e.target)
+        e.target.classList.toggle("rotate");
+        if (paires.value.length === 2) {
+            nbreTentatives.value++
+            if (paires.value[0].dataset.id === paires.value[1].dataset.id) {
+                pairesTrouver.value++
+                paires.value = []
+
+                if (pairesTrouver.value === 9) {
+                    clearInterval(timer.value);
+                    startTimer.value = false;
+                    // Afficher un message de félicitations
+                    console.log("Félicitations, vous avez gagné !");
+                }
+            } else {
+                setTimeout(() => {
+                    paires.value[0].classList.remove('rotate')
+                    paires.value[1].classList.remove('rotate')
+                    paires.value = []
+                }, 1000)
+            }
+        }
     }  
 }
+
+
 
 //const dureeAffichageInitial = 3000;
 
@@ -109,9 +145,9 @@ function afficherCartes() {
 
 function recommencer() {
     nbreTentatives.value = 0
-    pairesImages.value = 0
-    timestamp.value = 0
-    startTimer.value=true
+    pairesImages.value = []
+    timestamp.value ='0'
+    startTimer.value=false
     isButtonDisabled.value = true
     clearInterval(timer.value)
     paires.value = []
@@ -121,7 +157,7 @@ function recommencer() {
         clearInterval(timer.value)
         document.querySelector("#restart").innerHTML='rejouer'
         melange()
-        reset()
+        startTimer.value=true
 
 
     }
@@ -144,6 +180,10 @@ function reset() {
         affichageInitialEnCours.value = false; 
     }, 10000);
     });
+}
+
+function closeModal() {
+    pairesTrouver.value = 0; // Réinitialiser le compteur de paires trouvées
 }
 
 onMounted(() => {
@@ -169,6 +209,14 @@ onMounted(() => {
                         Recommencer</button>
                 </div>
                 <div class="cards">
+
+                    <div class="modal" v-if="pairesTrouver === 9">
+            <div class="modal-content">
+                <h2>Félicitations !</h2>
+                <p>Vous avez trouvé toutes les paires de cartes !</p>
+                <button class="modal-close-button" @click="closeModal">Fermer</button>
+            </div>
+        </div>
             
                     <div class="card" v-for="(element, i) in pairesImages" :key="i" :data-id="element.id"
                         @click.self="rotate" :ref="ref => cardRefs[i] = ref">
@@ -231,6 +279,37 @@ main {
     font-size: 25px;
 }
 
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.modal-close-button {
+    margin-top: 20px;
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
 .restart {
     padding: 5px 10px;
     background-color: #3498db;
