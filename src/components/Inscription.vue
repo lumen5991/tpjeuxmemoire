@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import {error} from 'console'
+import { error } from 'console'
 
 const error = ref('')
 
@@ -13,9 +13,9 @@ const inscription = ref({
     email: '',
     pseudo: '',
     password: '',
-    confirmPassword:''
+    confirmPassword: ''
 })
-const createUser = async()=> {
+const createUser = async () => {
 
     const { data, error } = await supabase.auth.signUp({
         email: inscription.value.email,
@@ -24,7 +24,7 @@ const createUser = async()=> {
     if (error) {
         error.value = error.message
     }
-    else{
+    else {
         router.replace('/connection')
     }
 }
@@ -47,7 +47,7 @@ const createUser = async()=> {
                                 <input type="email" id="email" placeholder="Email" v-model="inscription.email">
                                 <p>Votre pseudo</p>
                                 <input type="text" id="pseudo" placeholder="Pseudo" v-model="inscription.pseudo">
-                                
+
                             </div>
                             <div>
                                 <p>Votre mot de passe</p>
@@ -73,13 +73,13 @@ const createUser = async()=> {
     </div>
 </template>
 <style scoped>
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 20px;
 }
+
 .container {
     display: flex;
     justify-content: space-around;
@@ -88,7 +88,7 @@ const createUser = async()=> {
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    margin: 5rem auto;
+    margin: 15rem auto;
     gap: 2rem;
 }
 
@@ -98,13 +98,14 @@ const createUser = async()=> {
 }
 
 
- .left h2 {
+.left h2 {
     font-size: 40px;
     margin-bottom: 10px;
     text-align: center;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 1s ease-out 0.5s forwards;
+    font-size: 36px;
 
 }
 
@@ -122,8 +123,10 @@ const createUser = async()=> {
     text-align: justify;
 }
 
+
 .left span {
     color: #3498db;
+    font-size: 40px;
 }
 
 .right {
@@ -136,7 +139,7 @@ const createUser = async()=> {
     justify-content: space-between;
 }
 
- .form_signup {
+.form_signup {
     padding: 10px;
     opacity: 0;
     transform: translateY(20px);
@@ -173,24 +176,29 @@ const createUser = async()=> {
     color: #fff;
     font-size: 18px;
 }
+
 .form_signup input::placeholder {
     color: #fff;
 }
+
 .bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.button{
+
+.button {
     margin-top: 20px;
 }
-#connecter{
+
+#connecter {
     margin-top: 20px;
     text-decoration: none;
     margin-left: 10px;
     color: #fff;
 }
-#inscrire{
+
+#inscrire {
     display: inline-block;
     padding: 10px 20px;
     background-color: #fff;
@@ -216,6 +224,4 @@ const createUser = async()=> {
 #connecter:hover {
     background-color: #3498db;
     color: #fff;
-}
-
-</style>
+}</style>

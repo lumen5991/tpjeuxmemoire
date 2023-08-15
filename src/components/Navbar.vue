@@ -13,7 +13,7 @@
                     <div>
                         <router-link id="disconnect" to="/acceuil">Déconnexion</router-link>
                     </div>
-                  
+
                 </div>
             </nav>
         </header>
@@ -29,7 +29,8 @@
     padding: 10px 20px;
     font-size: 1.5rem;
 }
-.logo a{
+
+.logo a {
     text-decoration: none;
     color: #073757;
     font-weight: 800;
@@ -41,6 +42,7 @@
     padding: 10px 20px;
     border-radius: 5px;
 }
+
 .nav-links {
     list-style: none;
     display: flex;
@@ -50,7 +52,7 @@
     gap: 2rem;
 }
 
-#disconnect{
+#disconnect {
     text-decoration: none;
     outline: none;
     border: none;
@@ -60,9 +62,9 @@
     border-radius: 5px;
 
 }
-#disconnect:hover{
+
+#disconnect:hover {
     background-color: #fff;
-    color: #3498db; 
+    color: #3498db;
     padding: 10px 20px;
-}
-</style>
+}</style>

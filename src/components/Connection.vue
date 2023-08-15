@@ -58,7 +58,6 @@ const loginUser = async () => {
             </div>
         </div>
     </div>
-
 </template>
 <style scoped>
 .container {
@@ -72,6 +71,7 @@ const loginUser = async () => {
     margin: 5rem auto;
     gap: 2rem;
 }
+
 .left {
     width: 40%;
 }
@@ -122,35 +122,17 @@ const loginUser = async () => {
     margin-top: 5px;
     border: none;
     outline: none;
-/*     background-color: rgba(255, 255, 255, 0.2); */
     border-radius: 4px;
-    color: #fff;
+    color: #555;
     font-size: 18px;
 }
 
-
-/* #inscrire,
-#connecter {
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#inscrire:hover,
-#connecter:hover {
-    background-color: #3498db;
-    color: #fff;
-} */
-/* #connecter{
-    margin-top: 20px;
-    text-decoration: none;
-    margin-left: 10px;
-    color: #3498db;
-} */
-#inscrire{
+#inscrire {
     display: inline-block;
     padding: 10px 20px;
     transition: background-color 0.3s, color 0.3s;
     font-weight: 900;
-    color: #fff ;
+    color: #fff;
 }
 
 #connecter {
@@ -164,9 +146,4 @@ const loginUser = async () => {
     transition: background-color 0.3s, color 0.3s;
     font-weight: 900;
 }
-
-/* .form_signup a:hover {
-    background-color: #3498db;
-    color: #fff;
-} */
 </style>
