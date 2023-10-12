@@ -209,9 +209,13 @@ onMounted(() => {
 .wrapper {
     overflow-x: hidden;
     background-color: whitesmoke;
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    max-height: 100vh;
+    flex-direction: column; 
     width: 100%;
     padding: 10px 20px;
+    
 }
 
 main {
@@ -222,7 +226,7 @@ main {
 
 .container {
     border-radius: 5px;
-    padding: 0 15px;
+    padding: 0 10px;
     margin: 0 auto;
 }
 
@@ -279,21 +283,40 @@ main {
 }
 
 .cards {
-    gap: 1.5rem;
+    gap: 10px;
     perspective: 1000px;
     transform-style: preserve-3d;
-    margin-top: 20px;
+    margin-top: 10px;
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 10px 100px;
 }
 
 .card {
+    width: 140px;
+    height: 140px; 
     cursor: pointer;
     position: relative;
     transform-style: preserve-3d;
     transition: 0.3s all ease-in-out;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card-body {
+    width: 140px;
+    height: 140px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.card-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .card__front {
@@ -305,21 +328,6 @@ main {
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-}
-
-.card-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    width: 12rem;
-    height: 12rem; 
-}
-
-.card-body img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
 }
 
 .rotate {
