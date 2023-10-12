@@ -2,15 +2,15 @@
 import Navbar from '@/components/Navbar.vue';
 
 
-import Chien from "@/assets/images/Chien.png"
-import Coq from "@/assets/images/Coq.png"
-import Dinosaures from "@/assets/images/Dinosaures .png"
-import Hippopotame from "@/assets/images/Hippopotame.png"
-import Kangourou from "@/assets/images/Kangourou.png"
-import Lion from "@/assets/images/Lion.png"
-import Singe from "@/assets/images/Singe.png"
-import Panthere from "@/assets/images/Panthere.png"
-import Cheval from "@/assets/images/Cheval.png"
+import Chien from "@/assets/images/Chat.png"
+import Coq from "@/assets/images/Cheval.png"
+import Dinosaures from "@/assets/images/Singe.png"
+import Hippopotame from "@/assets/images/Coq.png"
+import Kangourou from "@/assets/images/Dinosaures.png"
+import Lion from "@/assets/images/Elephant.png"
+import Singe from "@/assets/images/Hippopotame.png"
+import Panthere from "@/assets/images/Kangourou.png"
+import Cheval from "@/assets/images/Lion.png"
 
 import { ref, onMounted, watch } from "vue"
 
@@ -158,7 +158,7 @@ onMounted(() => {
 </script>
 <template>
     <div class="wrapper">
-        <div class="container">
+        <div class="">
             <header>
                 <Navbar />
             </header>
@@ -198,7 +198,7 @@ onMounted(() => {
 </template>
 
 
-<style >
+<style scoped >
 * {
     padding: 0;
     margin: 0;
@@ -211,24 +211,23 @@ onMounted(() => {
     background-color: whitesmoke;
     height: 100vh;
     width: 100%;
-    padding: 1rem 2rem;
+    padding: 10px 20px;
 }
 
 main {
     overflow-y: hidden;
     margin-top: 25px;
-    gap: 20px;
+    gap: 15px;
 }
 
 .container {
     border-radius: 5px;
     padding: 0 15px;
     margin: 0 auto;
-
 }
 
 .config {
-    height: 5rem;
+    height: 4rem;
     width: 100%;
     padding: 0.5rem;
     border: 1px solid black;
@@ -236,7 +235,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 25px;
+    font-size: 16px;
 }
 
 .modal {
@@ -280,13 +279,12 @@ main {
 }
 
 .cards {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
     gap: 1.5rem;
     perspective: 1000px;
     transform-style: preserve-3d;
     margin-top: 20px;
-
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
 }
 
 .card {
@@ -299,8 +297,6 @@ main {
 }
 
 .card__front {
-    width: 100%;
-    height: 100%;
     cursor: default;
     transform: rotateY(180deg);
     -webkit-backface-visibility: hidden;
@@ -317,7 +313,7 @@ main {
     align-items: center;
     padding: 5px;
     width: 12rem;
-    height: 12rem;
+    height: 12rem; 
 }
 
 .card-body img {

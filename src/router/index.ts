@@ -17,7 +17,7 @@ const router = createRouter({
       component :Jeu
     },
     {
-      path:'/acceuil',
+      path:'/',
       component :Acceuil
     }, {
       path:'/inscription',
